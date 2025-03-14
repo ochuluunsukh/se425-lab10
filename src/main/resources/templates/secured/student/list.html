@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head th:replace="~{fragments/head-elements :: headElements}"></head>
+    <title>Student Register - Manage Students</title>
+</head>
+<body>
+  <div id="page-content">
+    <header th:replace="~{fragments/header :: header}"></header>
+      <p>&nbsp;</p>
+      <div class="container py-5 h-100 ">
+          <div class="row justify-content-center align-items-center h-100 ">
+              <div class="d-flex justify-content-between">
+                  <div>
+                      <h3>Student List </h3>
+                  </div>
+                  <div>
+                      <a href="/eregistrar/student/new" class="btn btn-info">Add new Student</a>
+                  </div>
+              </div>
+              <hr style="margin-top: 20px;" />
+              <form class="d-flex" th:action="@{/eregistrar/student/search}" method="get">
+                  <input class="form-control me-sm-2" type="text" name="keyword" th:value="${keyword}"
+                         placeholder="Find by First Name" size="20">
+                  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+              </form>
+              <hr style="margin-top: 20px;" />
+              <div>
+                  <table class="table table-hover">
+                      <thead>
+                      <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Student Number</th>
+                          <th scope="col">First Name</th>
+                          <th scope="col">Middle Name</th>
+                          <th scope="col">Last Name</th>
+                          <th scope="col">GPA</th>
+                          <th scope="col">Enrollment Date</th>
+                          <th scope="col">International</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="student, counter : ${students}">
+                          <th scope="row" th:text="${counter.count}+${'.'}"></th>
+                          <td th:text="${student.studentNumber}"></td>
+                          <td th:text="${student.firstName}"></td>
+                          <td th:text="${student.middleName}"></td>
+                          <td th:text="${student.lastName}"></td>
+                          <td th:text="${student.cgpa}"></td>
+                          <td th:text="${student.dateOfEnrollment}"></td>
+                          <td th:if="${student.isInternational}"><span class="badge bg-success">Yes</span></td>
+                          <td th:unless="${student.isInternational}"><span class="badge bg-primary">No</span>
+                          <td><a th:href="@{'/eregistrar/student/edit/{studentId}'(studentId=${student.studentId})}"
+                                  class="btn btn-light">Edit</a></th>
+                          </td>
+                          <td><a th:href="@{'/eregistrar/student/delete/{studentId}'(studentId=${student.studentId})}"
+                                  class="btn btn-secondary">Delete</a></th>
+                          </td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+  </div>
+
+</body>
+</html>

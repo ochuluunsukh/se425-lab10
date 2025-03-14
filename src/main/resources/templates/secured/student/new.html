@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head th:replace="~{fragments/head-elements :: headElements}"></head>
+    <title>City Library - System Administration - Manage Publishers</title>
+</head>
+<body>
+    <header th:replace="~{fragments/header :: header}"></header>
+    <fieldset class="container py-5 h-100">
+          <div class="d-flex justify-content-between">
+              <div>
+                  <h3>Add new Student </h3>
+              </div>
+              <div>
+                  <a href="/eregistrar/student/list" class="btn btn-info">Student List</a>
+              </div>
+          </div>
+          <hr />
+
+            <form data-bitwarden-watching="1" method="post" action="#" th:action="@{/eregistrar/student/new}"
+                    th:object="${student}">
+                  <fieldset>
+                      <legend>New Student</legend>
+                      <label class="col-form-label">Fields marked with asterisk (*) are required.</label>
+                      <div class="form-group">
+                          <fieldset>
+                              <div class="row">
+                                  <div class="form-group has-danger">
+                                      <label class="form-label mt-4" for="inputInvalid">Student Number*</label>
+                                      <input type="text" class="form-control"
+                                             th:classappend="${#fields.hasErrors('studentNumber')} ? is-invalid"
+                                             id="inputInvalid" name="studentNumber" placeholder="000-61-0001" autofocus>
+                                      <span th:if="${#fields.hasErrors('studentNumber')}" th:errors="*{studentNumber}"
+                                            class="invalid-feedback"></span>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-sm-4 form-group">
+                                      <label class="form-label mt-4">First Name*</label>
+                                      <input type="text" name="firstName" class="form-control" placeholder="John"
+                                             th:classappend="${#fields.hasErrors('firstName')} ? is-invalid">
+                                      <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+                                            class="invalid-feedback"></span>
+                                  </div>
+                                  <div class="col-sm-4 form-group">
+                                      <label class="form-label mt-4">Middle Name</label>
+                                      <input type="text" name="middleName" class="form-control" placeholder="Mal">
+                                  </div>
+                                  <div class="col-sm-4 form-group">
+                                      <label class="form-label mt-4">Last Name*</label>
+                                      <input type="text" name="lastName" class="form-control" placeholder="Doe"
+                                             th:classappend="${#fields.hasErrors('lastName')} ? is-invalid">
+                                      <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                                            class="invalid-feedback"></span>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-sm-6 form-group">
+                                      <label class="form-label mt-4">GPA</label>
+                                      <input type="text" name="cgpa" class="form-control" placeholder="3.59">
+                                  </div>
+                                  <div class="col-sm-6 form-group">
+                                      <fieldset>
+                                          <legend class="mt-4">International</legend>
+                                          <div class="form-check form-switch">
+                                              <input class="form-check-input" type="checkbox"
+                                                     th:field="*{isInternational}" checked=""
+                                                     data-com.bitwarden.browser.user-edited="yes" />
+                                              <label class="form-check-label">Yes</label>
+                                          </div>
+                                      </fieldset>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <label class="form-label mt-4">Date of Enrollment*</label>
+                                  <input type="date" name="dateOfEnrollment" class="form-control" placeholder="2025-03-11"
+                                         th:classappend="${#fields.hasErrors('dateOfEnrollment')} ? is-invalid">
+                                  <span th:if="${#fields.hasErrors('dateOfEnrollment')}" th:errors="*{dateOfEnrollment}"
+                                        class="invalid-feedback"></span>
+                              </div>
+                          </fieldset>
+                      </div>
+                  </fieldset>
+                  <div class="d-flex justify-content-between mt-2 pt-2">
+                      <div class="row">
+                          <input class="btn btn-danger" type="reset" value="Reset">
+                      </div>
+                      <div>
+                          <button type="submit" class="btn btn-success">Add Student</button>
+                      </div>
+                  </div>
+                  </fieldset>
+            </form>
+    </div>
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+  </div>
+</body>
+</html>
